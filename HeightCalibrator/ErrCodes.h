@@ -7,6 +7,9 @@
 enum ErrCode
 {
 	err_noErr = 0,
+	err_notEnoughPosts,
+	err_noIntersect,
+	err_singularMatrix,
 
 	err_end
 };
