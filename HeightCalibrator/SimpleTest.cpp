@@ -7,7 +7,8 @@ void SimpleTest::Run(std::string pImagePath, std::vector<Post> &pPosts, PostImag
 	// Initialization
 
 	HeightCalibrator calibr;
-	calibr.Initialize(pPosts);
+	LineF skyline;
+	calibr.Initialize(pPosts, &skyline);
 
 	// Processing
 
@@ -23,6 +24,7 @@ void SimpleTest::Run(std::string pImagePath, std::vector<Post> &pPosts, PostImag
 	for (unsigned int i = 0; i < pPosts.size(); ++i)
 		cv::line(img, cv::Point(pPosts[i].BaseX, pPosts[i].BaseY), cv::Point(pPosts[i].BaseX, pPosts[i].TopY), cv::Scalar(0, 0, 255), 2);
 	cv::line(img, cv::Point(pTestPost.BaseX, pTestPost.BaseY), cv::Point(pTestPost.BaseX, pTestPost.TopY), cv::Scalar(0, 255, 0), 2);
+	cv::line(img, cv::Point((int)skyline.Pt1.X, (int)skyline.Pt1.Y), cv::Point((int)skyline.Pt2.X, (int)skyline.Pt2.Y), cv::Scalar(255, 0, 0), 2);
 
 	cv::imshow("output", img);
 

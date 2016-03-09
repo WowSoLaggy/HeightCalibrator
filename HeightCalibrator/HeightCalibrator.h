@@ -12,7 +12,7 @@ class HeightCalibrator
 {
 public:
 
-	ErrCode Initialize(std::vector<Post> &pPosts);
+	ErrCode Initialize(std::vector<Post> &pPosts, LineF *pSkyline = nullptr);
 	ErrCode GetHeight(PostImage &pTestPost, float &pHeight);
 	ErrCode Dispose();
 

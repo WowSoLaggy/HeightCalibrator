@@ -2,7 +2,7 @@
 #include "HeightCalibrator.h"
 
 
-ErrCode HeightCalibrator::Initialize(std::vector<Post> &pPosts)
+ErrCode HeightCalibrator::Initialize(std::vector<Post> &pPosts, LineF *pSkyline)
 {
 	ErrCode err;
 
@@ -49,6 +49,9 @@ ErrCode HeightCalibrator::Initialize(std::vector<Post> &pPosts)
 	err = LeastSquares(interPoints, m_skyline);
 	if (err != err_noErr) return err;
 
+	if (pSkyline != nullptr)
+		*(pSkyline) = m_skyline;
+
 	return err_noErr;
 }
 
@@ -91,7 +94,7 @@ ErrCode HeightCalibrator::GetHeight(PostImage &pTestPost, float &pHeight)
 		(m_posts[maxDiffInd].BaseX - interPoint.X) * (m_posts[maxDiffInd].BaseX - interPoint.X) +
 		(m_posts[maxDiffInd].BaseY - interPoint.Y) * (m_posts[maxDiffInd].BaseY - interPoint.Y));
 
-	pHeight = distToTestPost * m_posts[maxDiffInd].Height / distToAnchorPost * ((float)(m_posts[maxDiffInd].TopY - m_posts[maxDiffInd].BaseY) / (pTestPost.TopY - pTestPost.BaseY));
+	pHeight = (float)(pTestPost.BaseY - pTestPost.TopY) / (distToTestPost * (float)(m_posts[maxDiffInd].BaseY - m_posts[maxDiffInd].TopY) / distToAnchorPost) * m_posts[maxDiffInd].Height;
 
 	return err_noErr;
 }
