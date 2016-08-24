@@ -15,6 +15,6 @@ Anchor post is the post on the scene with known height (scene-space). At least 3
   2. Build line that connects the test post bottom and the furthest post bottom. Find the intersection point with the skyline.
   3. Calculate the required height via the triangle similarity
 
-
-Anton Egorov, 2016
+<br>
+Anton Egorov, 2016<br>
 dohxehapo@gmail.com
